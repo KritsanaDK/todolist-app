@@ -1,24 +1,42 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
+
+  const [name, setName] = useState("");
+  const [list, setList] = useState([]);
+
+  const submitData = (e) => {
+    e.preventDefault()
+    // console.log(e);
+    // console.log("Name = ", name)
+
+    const newItem = {
+      id: uuidv4(),
+      title: name
+    }
+
+    setList([...list, newItem]);
+
+    console.log(list)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <section className='container'>
+      <h1>TodoList App</h1>
+      <form className='form-group' onSubmit={submitData}>
+        <div className='form-control'>
+          <input type="text" name="" id="" className='text-input'
+            onChange={(e) => setName(e.target.value)}
+            value={name} />
+          <button type="submit" className='submit-btn'>เพิ่มข้อมูล</button>
+        </div>
+
+
+      </form>
+
+    </section>
   );
 }
 
